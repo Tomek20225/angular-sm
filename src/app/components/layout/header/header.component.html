@@ -1,0 +1,37 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Angular SM</a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" (click)="collapseToggler()"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" #collapse id="navbarNav">
+        <ul ngbNav #nav="ngbNav" class="navbar-nav">
+          <li ngbNavItem>
+            <a ngbNavLink routerLinkActive="active" routerLink="/">Strona główna</a>
+          </li>
+          <li ngbNavItem *ngIf="!loggedIn">
+            <a ngbNavLink routerLinkActive="active" routerLink="/logowanie">Logowanie</a>
+          </li>
+          <li ngbNavItem *ngIf="!loggedIn">
+            <a ngbNavLink routerLinkActive="active" routerLink="/rejestracja">Rejestracja</a>
+          </li>
+          <li ngbNavItem *ngIf="loggedIn">
+            <a ngbNavLink routerLinkActive="active" routerLink="/konto">Moje konto</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <span *ngIf="loggedIn">Zalogowany jako {{ userData.name }} {{ userData.surname }}</span>
+        <span *ngIf="!loggedIn">Nie zalogowany</span>
+
+        <br>
+
+        <span class="logout-btn" *ngIf="loggedIn" (click)="logout()">Wyloguj</span>
+      </div>
+    </div>
+  </nav>
+</header>

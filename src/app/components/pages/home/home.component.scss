@@ -1,0 +1,16 @@
+form {
+    textarea,
+    input {
+        width: 100%;
+        resize: none;
+        border: 1px solid lightgray;
+        border-radius: 7px;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    form.card-body {
+        padding: 0.75rem;
+    }
+}

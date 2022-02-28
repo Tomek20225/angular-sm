@@ -1,0 +1,60 @@
+<p class="mb-4" *ngIf="showAlert">
+    <ngb-alert [type]="alertType" [dismissible]="false">
+        <strong>{{ alertMsgType }}!</strong> {{ alertMsg }}
+    </ngb-alert>
+</p>
+
+
+<div *ngIf="!loggedIn">
+    <h3>Witaj w serwisie społecznościowym!</h3>
+    <br>
+    <p>Zarejestruj się i wrzucaj posty, przeglądaj je i baw się dobrze!</p>
+    <p><b>Po zalogowaniu zobaczysz tu swoją tablicę z postami innych użytkowników!</b></p>
+    <br>
+    <p>Autor serwisu: Tomasz Kapcia, IVE</p>
+</div>
+
+
+<div *ngIf="loggedIn">
+    <div class="row">
+        <div class="col-12">
+            <h3>Dodaj post</h3>
+        </div>
+
+        <div class="col-12 mt-3">
+            <div class="card">
+                <form (ngSubmit)="onSubmit(f)" class="card-body" #f="ngForm">
+                    <input type="text" required name="title" maxlength="254" #title="ngModel" ngModel placeholder="O  czym myślisz?">
+                    
+                    <textarea (input)="autosize($event)" class="mt-2" #body="ngModel" ngModel required name="body" placeholder="Opowiedz Nam więcej!"></textarea>
+
+                    <button type="submit" [disabled]="!f.valid" class="btn btn-primary mt-2">Opublikuj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Twoja tablica</h3>
+        </div>
+
+        <div class="col-12 post-container mt-3" [@listAnimation]="posts.length">
+            <div class="post card mb-4" *ngFor="let post of posts">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ post.title }}
+                    </h4>
+    
+                    <p class="card-subtitle mb-2 text-muted">
+                        {{ post.author_id }} | {{ post.date }}
+                    </p>
+        
+                    <div class="card-text" [innerHTML]="post.body"></div>
+                </div>
+    
+                <img *ngIf="post.anchors[0]" class="card-img-bottom" src="{{ post.anchors[0] }}" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+</div>

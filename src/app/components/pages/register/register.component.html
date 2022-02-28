@@ -1,0 +1,37 @@
+<p class="mb-4" *ngIf="showAlert">
+    <ngb-alert [type]="alertType" [dismissible]="false">
+        <strong>Błąd!</strong> {{ alertMsg }}
+    </ngb-alert>
+</p>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Adres email</label>
+        <input #email="ngModel" ngModel required email type="email" class="form-control" aria-describedby="emailHelp" name="email" placeholder="Wprowadź email">
+
+        <span class="help-block" *ngIf="!email.valid && email.touched">Wprowadź email o właściwym formatowaniu</span>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleName">Imię</label>
+        <input #name="ngModel" ngModel required type="text" class="form-control" placeholder="Wprowadź imię" name="name">
+
+        <span class="help-block" *ngIf="name.touched && !name.value">Wprowadź imię</span>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSurname">Nazwisko</label>
+        <input #surname="ngModel" ngModel required type="text" class="form-control" placeholder="Wprowadź nazwisko" name="surname">
+
+        <span class="help-block" *ngIf="surname.touched && !surname.value">Wprowadź nazwisko</span>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Hasło</label>
+        <input #passwd="ngModel" ngModel required type="password" class="form-control" placeholder="Wprowadź hasło" name="password">
+
+        <span class="help-block" *ngIf="passwd.touched && !passwd.value">Wprowadź hasło</span>
+    </div>
+
+    <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Zarejestruj</button>
+</form>
